@@ -11,6 +11,9 @@ class Jugador:
         self.velocidad = 0  # Dirección y velocidad horizontal
         self.ancho = self.imagen.get_width()
         self.alto = self.imagen.get_height()
+        self.vidas = 3
+        self.vivo = True
+
 
     def mover(self, direccion):
         # Cambia la velocidad para moverse en la dirección dada
@@ -24,6 +27,12 @@ class Jugador:
     def dibujar(self, pantalla):
         # Dibuja al jugador en pantalla
         pantalla.blit(self.imagen, (self.x, self.y))
+    
+    def perder_vida(self):
+        self.vidas -= 1
+        if self.vidas <= 0:
+            self.vivo = False
+
 
 
 class Enemigo:
@@ -113,9 +122,9 @@ class Enemigo:
 
         if choca_izq or choca_der:
             for enemigo in enemigos:
-                enemigo.y += 10
+                enemigo.y += 1000
                 enemigo.velocidad_x *= -1
-
+ 
         for enemigo in enemigos:
             enemigo.x += enemigo.velocidad_x
 
